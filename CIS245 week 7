@@ -1,0 +1,125 @@
+print('Welcome to the virtual garage! Please select a choice from the following menu.')
+class Vehicle:  #creates the overall class
+    def __init__(self):  
+        self.make = ""
+        self.model = ""
+        self.year = ""
+        self.weight = ""
+
+    def set_make(self, make):
+        self.make = make
+
+    def get_make(self):
+        return self.make
+
+    def set_model(self, model):
+        self.model = model
+
+    def get_model(self):
+        return self.model
+    def set_year(self, year):
+        self.year = year
+
+    def get_year(self):
+        return self.year
+
+    def set_weight(self, weight):
+        self.weight = weight
+
+    def get_weight(self):
+        return self.weight
+
+    def display_info(self):
+        print(f"Make: {self.make}, Model: {self.model}, Year: {self.year}, Weight: {self.weight} lbs")
+
+
+class Car(Vehicle):  #creates a new class within the class of vehicle
+    def __init__(self):  #if the car class is chosen then in addition to the overall vehicle class questions, it will also prompt the user for these.
+        super().__init__()
+        self.num_doors = ""
+
+    def set_num_doors(self, num_doors):
+        self.num_doors = num_doors
+
+    def get_num_doors(self):
+        return self.num_doors
+
+    def display_info(self):
+        super().display_info()
+        print(f"Number of doors: {self.num_doors}")
+
+
+class Pickup(Vehicle):  #creates a different class within the vehicle class, at the same level as the car class
+    def __init__(self):  #if the pickup truck class is chosen then in addition to the overall vehicle class questions, it will also prompt the user for these.
+        super().__init__()
+        self.payload_capacity = ""
+        self.bed_length = ""
+
+    def set_payload_capacity(self, payload_capacity):
+        self.payload_capacity = payload_capacity
+
+    def get_payload_capacity(self):
+        return self.payload_capacity
+
+    def set_bed_length(self, bed_length):
+        self.bed_length = bed_length
+
+    def get_bed_length(self):
+        return self.bed_length
+
+    def display_info(self):
+        super().display_info()
+        print(f"Payload capacity: {self.payload_capacity} lbs")
+        print(f"Bed length: {self.bed_length} feet")
+
+#actually getting the information for the car or pickup
+def create_car():
+    car = Car()
+    car.set_make(input("Enter car make: "))
+    car.set_model(input("Enter car model: "))
+    car.set_year(input("Enter car year: "))
+    car.set_weight(input("Enter car weight: "))
+    car.set_num_doors(input("Enter number of doors: "))
+    return car
+  
+def create_pickup():
+    pickup = Pickup()
+    pickup.set_make(input("Enter pickup make: "))
+    pickup.set_model(input("Enter pickup model: "))
+    pickup.set_year(input("Enter pickup year: "))
+    pickup.set_weight(input("Enter pickup weight: "))
+    pickup.set_payload_capacity(input("Enter payload capacity: "))
+    pickup.set_bed_length(input("Enter bed length (in feet): "))
+    return pickup
+
+
+garage = []  #cacheing the vehicles so the user can have more than 1
+while True:  #allows for the system to while loop for multiple vehicle inputs, to view their inputs, and to exit the program
+    print("\nMenu:")
+    print("1. Add a car")
+    print("2. Add a pickup")
+    print("3. Display vehicles in the garage")
+    print("4. Exit")
+    choice = input("Enter your choice (1/2/3/4): ")
+
+    if choice == '1':
+        car = create_car()
+        garage.append(car)
+        print("Car added to the garage.")
+
+    elif choice == '2':
+        pickup = create_pickup()
+        garage.append(pickup)
+        print("Pickup truck added to the garage.")
+
+    elif choice == '3':
+        print("\nVehicles in the garage:")
+        for vehicle in garage:
+            vehicle.display_info()
+
+    elif choice == '4':
+        print("Thank you for using the virtual garage, goodbye!")
+        break
+
+    else:
+        print("Invalid input, please try again.")
